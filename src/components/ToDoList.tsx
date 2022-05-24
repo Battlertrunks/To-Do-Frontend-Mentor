@@ -10,15 +10,28 @@ const ToDoList = () => {
   ]);
 
   const recreateArray = (index: number) => {
-    const newArr = [...toDos];
+    const newArr: ToDo[] = [...toDos];
     newArr[index].completed = !newArr[index].completed;
 
     setToDos(newArr);
   };
 
+  const deleteTask = (index: number) => {
+    const newArr: ToDo[] = [
+      ...toDos.slice(0, index),
+      ...toDos.slice(index + 1),
+    ];
+
+    setToDos(newArr);
+  };
+
+  const addNewTask = (task: ToDo) => {
+    setToDos([task, ...toDos]);
+  };
+
   return (
     <section className="ToDoList">
-      <CreateToDoForm />
+      <CreateToDoForm addTask={addNewTask} />
       <ul>
         {toDos.map((toDo, i) => (
           <li key={i}>
@@ -26,6 +39,7 @@ const ToDoList = () => {
               {toDo.completed ? "Completed" : "Complete"}
             </button>
             <p>{toDo.toDoSentence}</p>
+            <button onClick={() => deleteTask(i)}>X</button>
           </li>
         ))}
       </ul>
