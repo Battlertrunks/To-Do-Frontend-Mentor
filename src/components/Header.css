@@ -1,0 +1,27 @@
+.Header {
+  background-image: url("../todo-app-main/images/bg-mobile-dark.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: absolute;
+  z-index: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 20vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 0 1.5em;
+  padding-top: 3em;
+}
+
+.Header h1 {
+  text-transform: uppercase;
+  letter-spacing: 0.75rem;
+  color: #fff;
+}
+
+.Header button {
+  background-color: transparent;
+  border: none;
+}

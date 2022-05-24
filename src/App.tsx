@@ -5,10 +5,10 @@ import ToDoList from "./components/ToDoList";
 
 function App() {
   return (
-    <div className="App">
+    <main className="App">
       <Header />
       <ToDoList />
-    </div>
+    </main>
   );
 }
 

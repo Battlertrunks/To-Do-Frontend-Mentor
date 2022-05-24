@@ -18,13 +18,17 @@ const CreateToDoForm = ({ addTask }: Props) => {
 
   return (
     <form className="CreateToDoForm" onSubmit={submitHandler}>
-      <input
-        type="checkbox"
-        name="check-activity"
-        id="check-activity"
-        value={""}
-        onChange={(e) => setCompleted(e.target.checked)}
-      />
+      <label className="container">
+        <input
+          className="checkbox"
+          type="checkbox"
+          name="check-activity"
+          id="check-activity"
+          value={""}
+          onChange={(e) => setCompleted(e.target.checked)}
+        />
+        <span className="checkmark"></span>
+      </label>
       <input
         type="text"
         name="task-name"
