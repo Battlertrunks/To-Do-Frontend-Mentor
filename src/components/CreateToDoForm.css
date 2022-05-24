@@ -4,6 +4,8 @@
   background-color: hsl(235, 24%, 19%);
   margin: 1em;
   padding: 1em;
+  position: relative;
+  border-radius: 0.25em;
 }
 
 .CreateToDoForm #check-activity {
@@ -14,16 +16,18 @@
   background-color: transparent;
   border: none;
   color: #fff;
-  width: 100%;
+  width: 85%;
+  margin-left: 15%;
 }
 
 .CreateToDoForm #task-name::placeholder {
-  color: #fff;
+  color: hsl(234, 11%, 52%);
 }
 
 .CreateToDoForm .container {
   display: block;
-  position: relative;
+  position: absolute;
+  left: 1.25em;
   cursor: pointer;
   user-select: none;
 }
@@ -53,9 +57,11 @@
 }
 
 .CreateToDoForm .container input:checked ~ .checkmark {
-  background-image: url("../todo-app-main/images/icon-check.svg");
+  height: 25px;
+  width: 25px;
+  background: url("../todo-app-main/images/icon-check.svg"),
+    linear-gradient(125deg, hsl(192, 100%, 67%), hsl(280, 87%, 65%));
   background-repeat: no-repeat;
-  background-size: contain;
-  background-color: purple;
+  background-position: center;
   border: none;
 }

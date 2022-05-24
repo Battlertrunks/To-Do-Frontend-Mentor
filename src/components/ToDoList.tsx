@@ -45,24 +45,39 @@ const ToDoList = () => {
   return (
     <section className="ToDoList">
       <CreateToDoForm addTask={addNewTask} />
-      <ul>
+      <ul className="list-item">
         {toDos
           .filter((toDo) => filterList(toDo))
           .map((toDo, i) => (
-            <li key={i}>
-              <button onClick={() => recreateArray(i)}>
-                {toDo.completed ? "Completed" : "Complete"}
-              </button>
-              <p>{toDo.toDoSentence}</p>
-              <button onClick={() => deleteTask(i)}>X</button>
+            <li className="task-item" key={i}>
+              <div className="comp-btn-and-sentence">
+                <div className="container-list">
+                  <span
+                    className={
+                      toDo.completed ? "checkmark-list comp" : "checkmark-list"
+                    }
+                  ></span>
+                  <button
+                    className="checkbox-list"
+                    onClick={() => recreateArray(i)}
+                  ></button>
+                </div>
+                <p className={toDo.completed ? "crossed-off" : ""}>
+                  {toDo.toDoSentence}
+                </p>
+              </div>
+              <button
+                className="delete-task-btn"
+                onClick={() => deleteTask(i)}
+              ></button>
             </li>
           ))}
       </ul>
-      <ul>
+      <ul className="manipulate-list-container">
         <li>
           <p>{toDos.filter((toDo) => !toDo.completed).length} items left</p>
         </li>
-        <li>
+        <li className="filter-btns-desktop">
           <ul>
             <li>
               <button onClick={() => setFilter(null)}>All</button>
@@ -79,6 +94,18 @@ const ToDoList = () => {
           <button onClick={() => clearCompleted()}>Clear Completed</button>
         </li>
       </ul>
+      <ul className="filter-btns-mobile">
+        <li>
+          <button onClick={() => setFilter(null)}>All</button>
+        </li>
+        <li>
+          <button onClick={() => setFilter(false)}>Active</button>
+        </li>
+        <li>
+          <button onClick={() => setFilter(true)}>Completed</button>
+        </li>
+      </ul>
+      <p className="drag-drop-instructions">Drag and drop to reorder list</p>
     </section>
   );
 };

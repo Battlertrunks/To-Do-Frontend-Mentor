@@ -8,3 +8,136 @@
   list-style: none;
   margin: 1em;
 }
+
+.ToDoList .list-item {
+  margin-bottom: 0;
+}
+
+.ToDoList .task-item {
+  display: flex;
+  justify-content: space-between;
+  background-color: hsl(235, 24%, 19%);
+  padding: 1em 0;
+  border-bottom: 1px solid hsl(237, 14%, 26%);
+}
+
+.ToDoList .task-item:first-child {
+  border-top-left-radius: 0.25em;
+  border-top-right-radius: 0.25em;
+}
+
+.ToDoList .task-item:last-child {
+  border-bottom-left-radius: 0.25em;
+  border-bottom-right-radius: 0.25em;
+}
+
+.ToDoList .comp-btn-and-sentence {
+  display: flex;
+}
+
+.ToDoList .comp-btn-and-sentence p {
+  margin-left: 2.5em;
+  color: hsl(234, 39%, 85%);
+}
+
+.ToDoList .comp-btn-and-sentence .crossed-off {
+  color: hsl(234, 11%, 52%);
+  text-decoration: line-through;
+}
+
+.ToDoList .delete-task-btn {
+  background-color: transparent;
+  border: none;
+  background-image: url("../todo-app-main/images/icon-cross.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  margin-right: 1em;
+}
+
+.ToDoList .container-list {
+  display: block;
+  position: relative;
+  left: 1.25em;
+  cursor: pointer;
+  user-select: none;
+}
+
+.ToDoList .container-list button {
+  position: relative;
+  opacity: 0;
+  cursor: pointer;
+  background-color: transparent;
+  height: 25px;
+  width: 25px;
+}
+
+.ToDoList .checkmark-list {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translateY(-15%);
+  height: 25px;
+  width: 25px;
+  background-color: transparent;
+  border: 1px solid #fff;
+  border-radius: 50%;
+}
+
+.ToDoList .container-list:hover button ~ .checkmark-list {
+  border: 1px solid #999;
+}
+
+.ToDoList .container-list .comp {
+  height: 25px;
+  width: 25px;
+  background: url("../todo-app-main/images/icon-check.svg"),
+    linear-gradient(125deg, hsl(192, 100%, 67%), hsl(280, 87%, 65%));
+  background-repeat: no-repeat;
+  background-position: center;
+  border: none;
+}
+
+.ToDoList .manipulate-list-container {
+  display: flex;
+  justify-content: space-between;
+  background-color: hsl(235, 24%, 19%);
+  margin: 0em 1em;
+  padding: 1em;
+}
+
+.ToDoList .manipulate-list-container p,
+.ToDoList .manipulate-list-container button {
+  color: hsl(234, 11%, 52%);
+}
+
+.ToDoList .manipulate-list-container button {
+  background-color: transparent;
+  border: none;
+}
+
+.ToDoList .filter-btns-desktop {
+  display: none;
+}
+
+.ToDoList .filter-btns-mobile {
+  background-color: hsl(235, 24%, 19%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1em;
+}
+
+.ToDoList .filter-btns-mobile li {
+  margin: 0 1em;
+}
+
+.ToDoList .filter-btns-mobile button {
+  background-color: transparent;
+  border: none;
+  color: hsl(234, 11%, 52%);
+}
+
+.ToDoList .drag-drop-instructions {
+  color: hsl(234, 11%, 52%);
+  text-align: center;
+}
