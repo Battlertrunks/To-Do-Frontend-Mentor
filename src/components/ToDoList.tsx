@@ -1,6 +1,7 @@
 import { useState } from "react";
 import ToDo from "../models/toDo";
 import CreateToDoForm from "./CreateToDoForm";
+import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import "./ToDoList.css";
 
 const ToDoList = () => {
@@ -42,37 +43,69 @@ const ToDoList = () => {
     setToDos([...toDos.filter((toDo) => !toDo.completed)]);
   };
 
+  const handleOnDragEnd = (result: any) => {
+    console.log(result);
+  };
+
   return (
     <section className="ToDoList">
       <CreateToDoForm addTask={addNewTask} />
-      <ul className="list-item">
-        {toDos
-          .filter((toDo) => filterList(toDo))
-          .map((toDo, i) => (
-            <li className="task-item" key={i}>
-              <div className="comp-btn-and-sentence">
-                <div className="container-list">
-                  <span
-                    className={
-                      toDo.completed ? "checkmark-list comp" : "checkmark-list"
-                    }
-                  ></span>
-                  <button
-                    className="checkbox-list"
-                    onClick={() => recreateArray(i)}
-                  ></button>
-                </div>
-                <p className={toDo.completed ? "crossed-off" : ""}>
-                  {toDo.toDoSentence}
-                </p>
-              </div>
-              <button
-                className="delete-task-btn"
-                onClick={() => deleteTask(i)}
-              ></button>
-            </li>
-          ))}
-      </ul>
+      <DragDropContext onDragEnd={(result) => console.log(result)}>
+        <Droppable droppableId="list">
+          {(provided) => {
+            return (
+              <ul
+                className="list-item"
+                {...provided.droppableProps}
+                ref={provided.innerRef}
+              >
+                {toDos
+                  .filter((toDo) => filterList(toDo))
+                  .map((toDo, i) => (
+                    <Draggable key={i} draggableId={i.toString()} index={i}>
+                      {(provided) => {
+                        return (
+                          <li
+                            className="task-item"
+                            {...provided.draggableProps}
+                            {...provided.dragHandleProps}
+                            ref={provided.innerRef}
+                          >
+                            <div className="comp-btn-and-sentence">
+                              <div className="container-list">
+                                <span
+                                  className={
+                                    toDo.completed
+                                      ? "checkmark-list comp"
+                                      : "checkmark-list"
+                                  }
+                                ></span>
+                                <button
+                                  className="checkbox-list"
+                                  onClick={() => recreateArray(i)}
+                                ></button>
+                              </div>
+                              <p
+                                className={toDo.completed ? "crossed-off" : ""}
+                              >
+                                {toDo.toDoSentence}
+                              </p>
+                            </div>
+                            <button
+                              className="delete-task-btn"
+                              onClick={() => deleteTask(i)}
+                            ></button>
+                          </li>
+                        );
+                      }}
+                    </Draggable>
+                  ))}
+                {provided.placeholder}
+              </ul>
+            );
+          }}
+        </Droppable>
+      </DragDropContext>
       <ul className="manipulate-list-container">
         <li>
           <p>{toDos.filter((toDo) => !toDo.completed).length} items left</p>
