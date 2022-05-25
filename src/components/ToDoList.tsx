@@ -6,8 +6,8 @@ import "./ToDoList.css";
 
 const ToDoList = () => {
   const [toDos, setToDos] = useState<ToDo[]>([
-    { toDoSentence: "Walk the dog", completed: false },
-    { toDoSentence: "Clean the house", completed: true },
+    { toDoSentence: "Walk the dog", completed: false, id: "10" },
+    { toDoSentence: "Clean the house", completed: true, id: "11" },
   ]);
 
   const [filter, setFilter] = useState<boolean | null>(null);
@@ -43,26 +43,32 @@ const ToDoList = () => {
     setToDos([...toDos.filter((toDo) => !toDo.completed)]);
   };
 
-  const handleOnDragEnd = (result: any) => {
-    console.log(result);
+  const handleOnDragEnd = (result: any): ToDo | void => {
+    if (!result.destination) return;
+
+    const tasks = Array.from(toDos);
+    const [reorderedTask] = tasks.splice(result.source.index, 1);
+    tasks.splice(result.destination.index, 0, reorderedTask);
+
+    setToDos(tasks);
   };
 
   return (
     <section className="ToDoList">
       <CreateToDoForm addTask={addNewTask} />
-      <DragDropContext onDragEnd={(result) => console.log(result)}>
-        <Droppable droppableId="list">
-          {(provided) => {
+      <DragDropContext onDragEnd={handleOnDragEnd}>
+        <Droppable droppableId="tasks">
+          {(provide) => {
             return (
               <ul
                 className="list-item"
-                {...provided.droppableProps}
-                ref={provided.innerRef}
+                {...provide.droppableProps}
+                ref={provide.innerRef}
               >
                 {toDos
                   .filter((toDo) => filterList(toDo))
                   .map((toDo, i) => (
-                    <Draggable key={i} draggableId={i.toString()} index={i}>
+                    <Draggable draggableId={toDo.id!} index={i} key={toDo.id}>
                       {(provided) => {
                         return (
                           <li
@@ -100,7 +106,7 @@ const ToDoList = () => {
                       }}
                     </Draggable>
                   ))}
-                {provided.placeholder}
+                {provide.placeholder}
               </ul>
             );
           }}
