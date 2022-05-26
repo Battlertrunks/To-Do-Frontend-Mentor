@@ -1,12 +1,18 @@
 import sunImg from "../todo-app-main/images/icon-sun.svg";
+import moonImg from "../todo-app-main/images/icon-moon.svg";
 import "./Header.css";
 
-const Header = () => {
+interface Props {
+  setColor: string;
+  changeColor: () => void;
+}
+
+const Header = ({ setColor, changeColor }: Props) => {
   return (
-    <header className="Header">
+    <header className={`Header ${setColor}`}>
       <h1>ToDo</h1>
-      <button>
-        <img src={sunImg} alt="sun icon" />
+      <button onClick={() => changeColor()}>
+        <img src={setColor ? moonImg : sunImg} alt="sun icon" />
       </button>
     </header>
   );

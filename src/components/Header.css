@@ -25,3 +25,7 @@
   background-color: transparent;
   border: none;
 }
+
+.light-mode {
+  background-image: url("../todo-app-main/images/bg-mobile-light.jpg");
+}

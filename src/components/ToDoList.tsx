@@ -4,7 +4,11 @@ import CreateToDoForm from "./CreateToDoForm";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import "./ToDoList.css";
 
-const ToDoList = () => {
+interface Props {
+  setColor: string;
+}
+
+const ToDoList = ({ setColor }: Props) => {
   const [toDos, setToDos] = useState<ToDo[]>([
     { toDoSentence: "Walk the dog", completed: false, visible: true, id: "0" },
     {
