@@ -156,16 +156,31 @@ const ToDoList = ({ setColor }: Props) => {
         <li>
           <p>{toDos.filter((toDo) => !toDo.completed).length} items left</p>
         </li>
-        <li className="filter-btns-desktop">
-          <ul>
+        <li>
+          <ul className="filter-btns-desktop">
             <li>
-              <button onClick={() => filterList(null)}>All</button>
+              <button
+                className={filterBtnClass === null ? "selected-filter" : ""}
+                onClick={() => filterList(null)}
+              >
+                All
+              </button>
             </li>
             <li>
-              <button onClick={() => filterList(false)}>Active</button>
+              <button
+                className={filterBtnClass === false ? "selected-filter" : ""}
+                onClick={() => filterList(false)}
+              >
+                Active
+              </button>
             </li>
             <li>
-              <button onClick={() => filterList(true)}>Completed</button>
+              <button
+                className={filterBtnClass ? "selected-filter" : ""}
+                onClick={() => filterList(true)}
+              >
+                Completed
+              </button>
             </li>
           </ul>
         </li>
@@ -173,7 +188,7 @@ const ToDoList = ({ setColor }: Props) => {
           <button onClick={() => clearCompleted()}>Clear Completed</button>
         </li>
       </ul>
-      <ul className={`filter-btns-mobile ${setColor}`}>
+      <ul className={`filter-btns-mobile`}>
         <li>
           <button
             className={filterBtnClass === null ? "selected-filter" : ""}

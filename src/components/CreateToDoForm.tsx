@@ -23,6 +23,7 @@ const CreateToDoForm = ({ addTask, setId, addId, setColor }: Props) => {
       id: setId.toString(),
     });
     addId();
+    setTaskName("");
   };
 
   return (
@@ -43,6 +44,7 @@ const CreateToDoForm = ({ addTask, setId, addId, setColor }: Props) => {
         name="task-name"
         id="task-name"
         placeholder="Create a new todo..."
+        autoComplete="off"
         value={taskName}
         onChange={(e) => setTaskName(e.target.value)}
       />

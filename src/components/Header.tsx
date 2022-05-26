@@ -10,10 +10,12 @@ interface Props {
 const Header = ({ setColor, changeColor }: Props) => {
   return (
     <header className={`Header ${setColor}`}>
-      <h1>ToDo</h1>
-      <button onClick={() => changeColor()}>
-        <img src={setColor ? moonImg : sunImg} alt="sun icon" />
-      </button>
+      <div>
+        <h1>ToDo</h1>
+        <button onClick={() => changeColor()}>
+          <img src={setColor ? moonImg : sunImg} alt="sun icon" />
+        </button>
+      </div>
     </header>
   );
 };

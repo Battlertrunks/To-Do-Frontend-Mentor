@@ -1,12 +1,14 @@
 .ToDoList {
   z-index: 1;
   position: relative;
+  margin: 0 auto;
   margin-top: 7em;
+  max-width: 50em;
 }
 
 .ToDoList ul {
   list-style: none;
-  margin: 1em;
+  margin: 1em 0;
 }
 
 .ToDoList .list-item {
@@ -37,6 +39,7 @@
 
 .ToDoList .comp-btn-and-sentence {
   display: flex;
+  align-items: center;
 }
 
 .ToDoList .comp-btn-and-sentence p {
@@ -140,8 +143,9 @@
 .ToDoList .manipulate-list-container {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   background-color: hsl(235, 24%, 19%);
-  margin: 0em 1em;
+  margin: 0em;
   padding: 1em;
 }
 
@@ -162,11 +166,8 @@
   border: none;
 }
 
+.ToDoList .filter-btns-mobile,
 .ToDoList .filter-btns-desktop {
-  display: none;
-}
-
-.ToDoList .filter-btns-mobile {
   background-color: hsl(235, 24%, 19%);
   display: flex;
   justify-content: center;
@@ -174,11 +175,16 @@
   padding: 1em;
 }
 
+.ToDoList .filter-btns-desktop {
+  display: none;
+}
+
 .ToDoList .filter-btns-mobile li {
   margin: 0 1em;
 }
 
-.ToDoList .filter-btns-mobile button {
+.ToDoList .filter-btns-mobile button,
+.ToDoList .filter-btns-desktop button {
   background-color: transparent;
   border: none;
   cursor: pointer;
@@ -186,7 +192,8 @@
   font-weight: 700;
 }
 
-.ToDoList .filter-btns-mobile.light-mode button {
+.ToDoList .filter-btns-mobile.light-mode button,
+.ToDoList .filter-btns-desktop.light-mode button {
   color: hsl(236, 9%, 61%);
 }
 
@@ -194,6 +201,7 @@
   color: hsl(233, 14%, 35%);
   font-weight: 700;
   text-align: center;
+  margin-top: 5em;
 }
 
 .ToDoList .drag-drop-instructions.light-mode {
@@ -209,6 +217,38 @@
   background-color: #fff;
 }
 
-.ToDoList .filter-btns-mobile.light-mode .selected-filter {
+.ToDoList .filter-btns-mobile .selected-filter,
+.ToDoList .filter-btns-mobile.light-mode .selected-filter,
+.ToDoList .manipulate-list-container .filter-btns-desktop .selected-filter,
+.ToDoList
+  .manipulate-list-container
+  .filter-btns-desktop.light-mode
+  .selected-filter {
   color: hsl(220, 98%, 61%);
+}
+
+@media only screen and (min-width: 1440px) {
+  .ToDoList .filter-btns-mobile {
+    display: none;
+  }
+
+  .manipulate-list-container {
+    position: relative;
+  }
+
+  .ToDoList .filter-btns-desktop {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: transparent;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: flex-start;
+  }
+
+  .ToDoList .filter-btns-desktop li {
+    margin: 0 1em;
+  }
 }

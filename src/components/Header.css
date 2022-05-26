@@ -7,7 +7,12 @@
   top: 0;
   left: 0;
   right: 0;
-  height: 20vh;
+  height: 25vh;
+}
+
+.Header div {
+  max-width: 50em;
+  margin: 0 auto;
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
@@ -29,4 +34,14 @@
 
 .Header.light-mode {
   background-image: url("../todo-app-main/images/bg-mobile-light.jpg");
+}
+
+@media only screen and (min-width: 500px) {
+  .Header {
+    background-image: url("../todo-app-main/images/bg-desktop-dark.jpg");
+  }
+
+  .Header.light-mode {
+    background-image: url("../todo-app-main/images/bg-desktop-light.jpg");
+  }
 }

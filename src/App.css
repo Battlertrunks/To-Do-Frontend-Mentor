@@ -1,6 +1,12 @@
 .App {
-  background-color: #222;
   height: 100vh;
+  background-color: #222;
+  margin: 0 auto;
+  padding: 0 1.2em;
+}
+
+.App main {
+  max-width: 50em;
 }
 
 .App.light-mode {
