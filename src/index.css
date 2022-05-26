@@ -10,6 +10,13 @@ li {
   margin: 0;
 }
 
+h2,
+p,
+button,
+input {
+  font-size: 12px;
+}
+
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",

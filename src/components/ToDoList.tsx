@@ -21,7 +21,7 @@ const ToDoList = ({ setColor }: Props) => {
 
   const [idToInsert, setIdToInsert] = useState<number>(2);
 
-  console.log(toDos);
+  const [filterBtnClass, setFilterBtnClass] = useState<boolean | null>(null);
 
   const addId = (): void => setIdToInsert((prev) => prev + 1);
 
@@ -47,10 +47,12 @@ const ToDoList = ({ setColor }: Props) => {
 
   const filterList = (setVisible: boolean | null): void => {
     if (setVisible === null) {
+      setFilterBtnClass(setVisible);
       const newArr = [...toDos];
       newArr.forEach((task) => (task.visible = true));
       setToDos(newArr);
     } else if (setVisible) {
+      setFilterBtnClass(true);
       const newArr = [...toDos];
       newArr.forEach((task) => {
         if (task.completed) task.visible = true;
@@ -58,6 +60,7 @@ const ToDoList = ({ setColor }: Props) => {
       });
       setToDos(newArr);
     } else if (!setVisible) {
+      setFilterBtnClass(false);
       const newArr = [...toDos];
       newArr.forEach((task) => {
         if (!task.completed) task.visible = true;
@@ -111,7 +114,17 @@ const ToDoList = ({ setColor }: Props) => {
                           ref={provided.innerRef}
                         >
                           <div className="comp-btn-and-sentence">
-                            <div className="container-list">
+                            <div
+                              className={
+                                toDo.completed
+                                  ? "container-list comp"
+                                  : "container-list"
+                              }
+                            >
+                              <button
+                                className="checkbox-list"
+                                onClick={() => recreateArray(i)}
+                              ></button>
                               <span
                                 className={
                                   toDo.completed
@@ -119,10 +132,6 @@ const ToDoList = ({ setColor }: Props) => {
                                     : "checkmark-list"
                                 }
                               ></span>
-                              <button
-                                className="checkbox-list"
-                                onClick={() => recreateArray(i)}
-                              ></button>
                             </div>
                             <p className={toDo.completed ? "crossed-off" : ""}>
                               {toDo.toDoSentence}
@@ -166,13 +175,28 @@ const ToDoList = ({ setColor }: Props) => {
       </ul>
       <ul className={`filter-btns-mobile ${setColor}`}>
         <li>
-          <button onClick={() => filterList(null)}>All</button>
+          <button
+            className={filterBtnClass === null ? "selected-filter" : ""}
+            onClick={() => filterList(null)}
+          >
+            All
+          </button>
         </li>
         <li>
-          <button onClick={() => filterList(false)}>Active</button>
+          <button
+            className={filterBtnClass === false ? "selected-filter" : ""}
+            onClick={() => filterList(false)}
+          >
+            Active
+          </button>
         </li>
         <li>
-          <button onClick={() => filterList(true)}>Completed</button>
+          <button
+            className={filterBtnClass ? "selected-filter" : ""}
+            onClick={() => filterList(true)}
+          >
+            Completed
+          </button>
         </li>
       </ul>
       <p className={`drag-drop-instructions ${setColor}`}>

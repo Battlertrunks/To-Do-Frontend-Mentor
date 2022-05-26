@@ -1,6 +1,6 @@
 .CreateToDoForm {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   background-color: hsl(235, 24%, 19%);
   margin: 1em;
   padding: 1em;
@@ -16,12 +16,18 @@
   background-color: transparent;
   border: none;
   color: #fff;
-  width: 85%;
-  margin-left: 15%;
+  margin-left: 50px;
+  flex: 1;
+  width: 100%;
 }
 
 .CreateToDoForm #task-name::placeholder {
+  font-weight: 700;
   color: hsl(234, 11%, 52%);
+}
+
+.CreateToDoForm #task-name:focus {
+  outline: none;
 }
 
 .CreateToDoForm .container {
@@ -30,6 +36,7 @@
   left: 1.25em;
   cursor: pointer;
   user-select: none;
+  flex: 0.1;
 }
 
 .CreateToDoForm .container input {
@@ -53,20 +60,27 @@
 }
 
 .CreateToDoForm.light-mode .checkmark {
-  outline: 2px solid #eee;
+  border: 2px solid #eee;
   outline-offset: -3px;
 }
 
 .CreateToDoForm .container:hover input ~ .checkmark {
-  border: 1px solid #eee;
+  background: linear-gradient(#fff 0 0) padding-box,
+    linear-gradient(125deg, hsl(192, 100%, 67%), hsl(280, 87%, 65%)) border-box;
+  border: 2px solid transparent;
+  width: 23px;
+  height: 23px;
+  display: inline-block;
 }
 
 .CreateToDoForm .container input:checked ~ .checkmark {
-  height: 25px;
-  width: 25px;
+  height: 27px;
+  width: 27px;
   background: url("../todo-app-main/images/icon-check.svg"),
     linear-gradient(125deg, hsl(192, 100%, 67%), hsl(280, 87%, 65%));
   background-repeat: no-repeat;
   background-position: center;
   border: none;
+  outline: 2px solid #eee;
+  outline-offset: -3px;
 }

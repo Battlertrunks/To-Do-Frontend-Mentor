@@ -26,10 +26,14 @@
   border-top-right-radius: 0.25em;
 }
 
-.ToDoList .task-item:last-child {
+.ToDoList .task-item.light-mode {
+  border-bottom: 1px solid hsl(233, 11%, 84%);
+}
+
+/* .ToDoList .task-item:last-child {
   border-bottom-left-radius: 0.25em;
   border-bottom-right-radius: 0.25em;
-}
+} */
 
 .ToDoList .comp-btn-and-sentence {
   display: flex;
@@ -37,6 +41,7 @@
 
 .ToDoList .comp-btn-and-sentence p {
   margin-left: 2.5em;
+  font-weight: 700;
   color: hsl(234, 39%, 85%);
 }
 
@@ -87,25 +92,44 @@
   top: 0;
   left: 0;
   transform: translateY(-15%);
-  height: 25px;
-  width: 25px;
+  height: 23px;
+  width: 23px;
   background-color: transparent;
-  border: 1px solid #fff;
+  border: 1px solid #eee;
   border-radius: 50%;
-}
-
-.ToDoList .light-mode .checkmark-list {
-  outline: 2px solid #eee;
-  outline-offset: -3px;
+  pointer-events: none;
 }
 
 .ToDoList .container-list:hover button ~ .checkmark-list {
-  border: 1px solid #999;
+  background: linear-gradient(hsl(235, 24%, 19%) 0 0) padding-box,
+    linear-gradient(125deg, hsl(192, 100%, 67%), hsl(280, 87%, 65%)) border-box;
+  border: 2px solid transparent;
+  width: 23px;
+  height: 23px;
+  display: inline-block;
+}
+
+.ToDoList .light-mode .container-list:hover button ~ .checkmark-list {
+  background: linear-gradient(#fff 0 0) padding-box,
+    linear-gradient(125deg, hsl(192, 100%, 67%), hsl(280, 87%, 65%)) border-box;
+}
+
+.ToDoList .container-list.comp:hover button ~ .checkmark-list {
+  background: url("../todo-app-main/images/icon-check.svg"),
+    linear-gradient(125deg, hsl(192, 100%, 67%), hsl(280, 87%, 65%)),
+    padding-box,
+    linear-gradient(125deg, hsl(192, 100%, 67%), hsl(280, 87%, 65%)) border-box;
+  border: 2px solid transparent;
+  width: 23px;
+  height: 23px;
+  background-repeat: no-repeat;
+  background-position: center;
+  display: inline-block;
 }
 
 .ToDoList .container-list .comp {
-  height: 25px;
-  width: 25px;
+  height: 27px;
+  width: 27px;
   background: url("../todo-app-main/images/icon-check.svg"),
     linear-gradient(125deg, hsl(192, 100%, 67%), hsl(280, 87%, 65%));
   background-repeat: no-repeat;
@@ -157,6 +181,7 @@
 .ToDoList .filter-btns-mobile button {
   background-color: transparent;
   border: none;
+  cursor: pointer;
   color: hsl(234, 11%, 52%);
   font-weight: 700;
 }
@@ -166,7 +191,7 @@
 }
 
 .ToDoList .drag-drop-instructions {
-  color: hsl(234, 11%, 52%);
+  color: hsl(233, 14%, 35%);
   font-weight: 700;
   text-align: center;
 }
@@ -182,4 +207,8 @@
 
 .ToDoList .light-mode {
   background-color: #fff;
+}
+
+.ToDoList .filter-btns-mobile.light-mode .selected-filter {
+  color: hsl(220, 98%, 61%);
 }
