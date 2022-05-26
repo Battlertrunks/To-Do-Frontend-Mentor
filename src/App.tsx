@@ -13,7 +13,7 @@ function App() {
   const color: string = lightMode ? "light-mode" : "";
 
   return (
-    <main className="App">
+    <main className={`App ${color}`}>
       <Header setColor={color} changeColor={changeColorMode} />
       <ToDoList setColor={color} />
     </main>

@@ -6,9 +6,10 @@ interface Props {
   addTask: (task: ToDo) => void;
   setId: number;
   addId: () => void;
+  setColor: string;
 }
 
-const CreateToDoForm = ({ addTask, setId, addId }: Props) => {
+const CreateToDoForm = ({ addTask, setId, addId, setColor }: Props) => {
   const [completed, setCompleted] = useState<boolean>(false);
   const [taskName, setTaskName] = useState<string>("");
 
@@ -25,7 +26,7 @@ const CreateToDoForm = ({ addTask, setId, addId }: Props) => {
   };
 
   return (
-    <form className="CreateToDoForm" onSubmit={submitHandler}>
+    <form className={`CreateToDoForm ${setColor}`} onSubmit={submitHandler}>
       <label className="container">
         <input
           className="checkbox"

@@ -24,8 +24,9 @@
 .Header button {
   background-color: transparent;
   border: none;
+  cursor: pointer;
 }
 
-.light-mode {
+.Header.light-mode {
   background-image: url("../todo-app-main/images/bg-mobile-light.jpg");
 }

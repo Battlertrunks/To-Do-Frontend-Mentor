@@ -45,6 +45,17 @@
   text-decoration: line-through;
 }
 
+.ToDoList .light-mode .comp-btn-and-sentence p {
+  margin-left: 2.5em;
+  font-weight: 700;
+  color: hsl(235, 19%, 35%);
+}
+
+.ToDoList .light-mode .comp-btn-and-sentence .crossed-off {
+  color: hsl(233, 11%, 84%);
+  text-decoration: line-through;
+}
+
 .ToDoList .delete-task-btn {
   background-color: transparent;
   border: none;
@@ -83,6 +94,11 @@
   border-radius: 50%;
 }
 
+.ToDoList .light-mode .checkmark-list {
+  outline: 2px solid #eee;
+  outline-offset: -3px;
+}
+
 .ToDoList .container-list:hover button ~ .checkmark-list {
   border: 1px solid #999;
 }
@@ -108,10 +124,17 @@
 .ToDoList .manipulate-list-container p,
 .ToDoList .manipulate-list-container button {
   color: hsl(234, 11%, 52%);
+  font-weight: 700;
+}
+
+.ToDoList .manipulate-list-container.light-mode p,
+.ToDoList .manipulate-list-container.light-mode button {
+  color: hsl(236, 9%, 61%);
 }
 
 .ToDoList .manipulate-list-container button {
   background-color: transparent;
+  cursor: pointer;
   border: none;
 }
 
@@ -135,13 +158,28 @@
   background-color: transparent;
   border: none;
   color: hsl(234, 11%, 52%);
+  font-weight: 700;
+}
+
+.ToDoList .filter-btns-mobile.light-mode button {
+  color: hsl(236, 9%, 61%);
 }
 
 .ToDoList .drag-drop-instructions {
   color: hsl(234, 11%, 52%);
+  font-weight: 700;
   text-align: center;
+}
+
+.ToDoList .drag-drop-instructions.light-mode {
+  color: hsl(236, 9%, 61%);
+  background-color: transparent;
 }
 
 .ToDoList .show-task {
   display: none;
+}
+
+.ToDoList .light-mode {
+  background-color: #fff;
 }

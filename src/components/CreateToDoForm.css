@@ -52,6 +52,11 @@
   border-radius: 50%;
 }
 
+.CreateToDoForm.light-mode .checkmark {
+  outline: 2px solid #eee;
+  outline-offset: -3px;
+}
+
 .CreateToDoForm .container:hover input ~ .checkmark {
   border: 1px solid #eee;
 }

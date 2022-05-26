@@ -1,4 +1,8 @@
-main {
+.App {
   background-color: #222;
   height: 100vh;
+}
+
+.App.light-mode {
+  background-color: #eee;
 }

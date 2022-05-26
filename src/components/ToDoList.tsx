@@ -83,7 +83,12 @@ const ToDoList = ({ setColor }: Props) => {
 
   return (
     <section className="ToDoList">
-      <CreateToDoForm addId={addId} setId={idToInsert} addTask={addNewTask} />
+      <CreateToDoForm
+        addId={addId}
+        setId={idToInsert}
+        addTask={addNewTask}
+        setColor={setColor}
+      />
       <DragDropContext onDragEnd={handleOnDragEnd}>
         <Droppable droppableId="tasks">
           {(provide) => {
@@ -98,7 +103,7 @@ const ToDoList = ({ setColor }: Props) => {
                     {(provided) => {
                       return (
                         <li
-                          className={`task-item ${
+                          className={`task-item ${setColor} ${
                             !toDo.visible ? "show-task" : ""
                           }`}
                           {...provided.draggableProps}
@@ -138,7 +143,7 @@ const ToDoList = ({ setColor }: Props) => {
           }}
         </Droppable>
       </DragDropContext>
-      <ul className="manipulate-list-container">
+      <ul className={`manipulate-list-container ${setColor}`}>
         <li>
           <p>{toDos.filter((toDo) => !toDo.completed).length} items left</p>
         </li>
@@ -159,7 +164,7 @@ const ToDoList = ({ setColor }: Props) => {
           <button onClick={() => clearCompleted()}>Clear Completed</button>
         </li>
       </ul>
-      <ul className="filter-btns-mobile">
+      <ul className={`filter-btns-mobile ${setColor}`}>
         <li>
           <button onClick={() => filterList(null)}>All</button>
         </li>
@@ -170,7 +175,9 @@ const ToDoList = ({ setColor }: Props) => {
           <button onClick={() => filterList(true)}>Completed</button>
         </li>
       </ul>
-      <p className="drag-drop-instructions">Drag and drop to reorder list</p>
+      <p className={`drag-drop-instructions ${setColor}`}>
+        Drag and drop to reorder list
+      </p>
     </section>
   );
 };
