@@ -6,11 +6,20 @@ import "./ToDoList.css";
 
 const ToDoList = () => {
   const [toDos, setToDos] = useState<ToDo[]>([
-    { toDoSentence: "Walk the dog", completed: false, id: "10" },
-    { toDoSentence: "Clean the house", completed: true, id: "11" },
+    { toDoSentence: "Walk the dog", completed: false, visible: true, id: "0" },
+    {
+      toDoSentence: "Clean the house",
+      completed: true,
+      visible: true,
+      id: "1",
+    },
   ]);
 
-  const [filter, setFilter] = useState<boolean | null>(null);
+  const [idToInsert, setIdToInsert] = useState<number>(2);
+
+  console.log(toDos);
+
+  const addId = (): void => setIdToInsert((prev) => prev + 1);
 
   const recreateArray = (index: number): void => {
     const newArr: ToDo[] = [...toDos];
@@ -32,11 +41,26 @@ const ToDoList = () => {
     setToDos([task, ...toDos]);
   };
 
-  const filterList = (toDo: ToDo): boolean => {
-    if (filter === null) return true;
-    else if (filter === toDo.completed && filter) return true;
-    else if (filter === toDo.completed && !filter) return true;
-    return false;
+  const filterList = (setVisible: boolean | null): void => {
+    if (setVisible === null) {
+      const newArr = [...toDos];
+      newArr.forEach((task) => (task.visible = true));
+      setToDos(newArr);
+    } else if (setVisible) {
+      const newArr = [...toDos];
+      newArr.forEach((task) => {
+        if (task.completed) task.visible = true;
+        else task.visible = false;
+      });
+      setToDos(newArr);
+    } else if (!setVisible) {
+      const newArr = [...toDos];
+      newArr.forEach((task) => {
+        if (!task.completed) task.visible = true;
+        else task.visible = false;
+      });
+      setToDos(newArr);
+    }
   };
 
   const clearCompleted = (): void => {
@@ -55,7 +79,7 @@ const ToDoList = () => {
 
   return (
     <section className="ToDoList">
-      <CreateToDoForm addTask={addNewTask} />
+      <CreateToDoForm addId={addId} setId={idToInsert} addTask={addNewTask} />
       <DragDropContext onDragEnd={handleOnDragEnd}>
         <Droppable droppableId="tasks">
           {(provide) => {
@@ -65,47 +89,45 @@ const ToDoList = () => {
                 {...provide.droppableProps}
                 ref={provide.innerRef}
               >
-                {toDos
-                  .filter((toDo) => filterList(toDo))
-                  .map((toDo, i) => (
-                    <Draggable draggableId={toDo.id!} index={i} key={toDo.id}>
-                      {(provided) => {
-                        return (
-                          <li
-                            className="task-item"
-                            {...provided.draggableProps}
-                            {...provided.dragHandleProps}
-                            ref={provided.innerRef}
-                          >
-                            <div className="comp-btn-and-sentence">
-                              <div className="container-list">
-                                <span
-                                  className={
-                                    toDo.completed
-                                      ? "checkmark-list comp"
-                                      : "checkmark-list"
-                                  }
-                                ></span>
-                                <button
-                                  className="checkbox-list"
-                                  onClick={() => recreateArray(i)}
-                                ></button>
-                              </div>
-                              <p
-                                className={toDo.completed ? "crossed-off" : ""}
-                              >
-                                {toDo.toDoSentence}
-                              </p>
+                {toDos.map((toDo, i) => (
+                  <Draggable draggableId={toDo.id!} index={i} key={toDo.id}>
+                    {(provided) => {
+                      return (
+                        <li
+                          className={`task-item ${
+                            !toDo.visible ? "show-task" : ""
+                          }`}
+                          {...provided.draggableProps}
+                          {...provided.dragHandleProps}
+                          ref={provided.innerRef}
+                        >
+                          <div className="comp-btn-and-sentence">
+                            <div className="container-list">
+                              <span
+                                className={
+                                  toDo.completed
+                                    ? "checkmark-list comp"
+                                    : "checkmark-list"
+                                }
+                              ></span>
+                              <button
+                                className="checkbox-list"
+                                onClick={() => recreateArray(i)}
+                              ></button>
                             </div>
-                            <button
-                              className="delete-task-btn"
-                              onClick={() => deleteTask(i)}
-                            ></button>
-                          </li>
-                        );
-                      }}
-                    </Draggable>
-                  ))}
+                            <p className={toDo.completed ? "crossed-off" : ""}>
+                              {toDo.toDoSentence}
+                            </p>
+                          </div>
+                          <button
+                            className="delete-task-btn"
+                            onClick={() => deleteTask(i)}
+                          ></button>
+                        </li>
+                      );
+                    }}
+                  </Draggable>
+                ))}
                 {provide.placeholder}
               </ul>
             );
@@ -119,13 +141,13 @@ const ToDoList = () => {
         <li className="filter-btns-desktop">
           <ul>
             <li>
-              <button onClick={() => setFilter(null)}>All</button>
+              <button onClick={() => filterList(null)}>All</button>
             </li>
             <li>
-              <button onClick={() => setFilter(false)}>Active</button>
+              <button onClick={() => filterList(false)}>Active</button>
             </li>
             <li>
-              <button onClick={() => setFilter(true)}>Completed</button>
+              <button onClick={() => filterList(true)}>Completed</button>
             </li>
           </ul>
         </li>
@@ -135,13 +157,13 @@ const ToDoList = () => {
       </ul>
       <ul className="filter-btns-mobile">
         <li>
-          <button onClick={() => setFilter(null)}>All</button>
+          <button onClick={() => filterList(null)}>All</button>
         </li>
         <li>
-          <button onClick={() => setFilter(false)}>Active</button>
+          <button onClick={() => filterList(false)}>Active</button>
         </li>
         <li>
-          <button onClick={() => setFilter(true)}>Completed</button>
+          <button onClick={() => filterList(true)}>Completed</button>
         </li>
       </ul>
       <p className="drag-drop-instructions">Drag and drop to reorder list</p>

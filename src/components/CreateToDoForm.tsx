@@ -4,16 +4,24 @@ import "./CreateToDoForm.css";
 
 interface Props {
   addTask: (task: ToDo) => void;
+  setId: number;
+  addId: () => void;
 }
 
-const CreateToDoForm = ({ addTask }: Props) => {
+const CreateToDoForm = ({ addTask, setId, addId }: Props) => {
   const [completed, setCompleted] = useState<boolean>(false);
   const [taskName, setTaskName] = useState<string>("");
 
   const submitHandler = (e: FormEvent) => {
     e.preventDefault();
 
-    addTask({ completed, toDoSentence: taskName });
+    addTask({
+      completed,
+      toDoSentence: taskName,
+      visible: true,
+      id: setId.toString(),
+    });
+    addId();
   };
 
   return (

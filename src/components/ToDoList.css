@@ -141,3 +141,7 @@
   color: hsl(234, 11%, 52%);
   text-align: center;
 }
+
+.ToDoList .show-task {
+  display: none;
+}
