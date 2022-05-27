@@ -20,6 +20,11 @@
   width: 100%;
 }
 
+.CreateToDoForm.light-mode #task-name {
+  color: hsl(235, 19%, 35%);
+  font-weight: 700;
+}
+
 .CreateToDoForm #task-name::placeholder {
   font-weight: 700;
   color: hsl(234, 11%, 52%);

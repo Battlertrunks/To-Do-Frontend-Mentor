@@ -71,6 +71,7 @@
   background-repeat: no-repeat;
   background-position: center;
   margin-right: 1em;
+  cursor: pointer;
 }
 
 .ToDoList .container-list {
