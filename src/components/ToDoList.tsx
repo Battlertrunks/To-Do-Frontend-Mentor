@@ -8,18 +8,23 @@ interface Props {
   setColor: string;
 }
 
-const ToDoList = ({ setColor }: Props) => {
-  const [toDos, setToDos] = useState<ToDo[]>([
-    { toDoSentence: "Walk the dog", completed: false, visible: true, id: "0" },
-    {
-      toDoSentence: "Clean the house",
-      completed: true,
-      visible: true,
-      id: "1",
-    },
-  ]);
+const listToDo: ToDo[] = [
+  { toDoSentence: "Walk the dog.", completed: false, visible: true, id: "0" },
+  { toDoSentence: "Clean the house.", completed: true, visible: true, id: "1" },
+  {
+    toDoSentence: "Buy groceries at Target.",
+    completed: false,
+    visible: true,
+    id: "2",
+  },
+];
 
-  const [idToInsert, setIdToInsert] = useState<number>(2);
+const ToDoList = ({ setColor }: Props) => {
+  const [toDos, setToDos] = useState<ToDo[]>(listToDo);
+
+  const [idToInsert, setIdToInsert] = useState<number>(
+    parseInt(toDos[toDos.length - 1].id!) + 1
+  );
 
   const [filterBtnClass, setFilterBtnClass] = useState<boolean | null>(null);
 
@@ -188,7 +193,7 @@ const ToDoList = ({ setColor }: Props) => {
           <button onClick={() => clearCompleted()}>Clear Completed</button>
         </li>
       </ul>
-      <ul className={`filter-btns-mobile`}>
+      <ul className={`filter-btns-mobile ${setColor}`}>
         <li>
           <button
             className={filterBtnClass === null ? "selected-filter" : ""}
